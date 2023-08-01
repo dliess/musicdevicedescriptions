@@ -9,9 +9,7 @@
 #include <unordered_map>
 #include <vector>
 
-#include "EnumReflect.h"
 #include "MidiMessageIds.h"
-#include "Parameter.h"
 #include "SoundSysExDescription.h"
 namespace base::musicDevice::description::sound
 {
@@ -36,7 +34,11 @@ struct MidiSysexMsg
 
 using ParameterDumpRequestMsg = mpark::variant<MidiCCAndValue, MidiSysexMsg>;
 
-DECLARE_ENUM(ParameterDumpRequestEffect, uint, PerVoice, AllVoicesOfEngine);
+enum class ParameterDumpRequestEffect: uint 
+{
+   PerVoice, 
+   AllVoicesOfEngine
+};
 
 struct ParameterDumpRequest
 {
@@ -91,10 +93,11 @@ struct Voice : public MidiChannelHolder
    std::optional<int> midiTriggerNoteNumber;
 };
 
-DECLARE_ENUM(ComponentRole, uint, Unknown, Track, NoteTrigger, Oscillator, Amp,
+enum class ComponentRole: uint
+{ Unknown, Track, NoteTrigger, Oscillator, Amp,
              Filter, LPFilter, HPFilter, LPHPFilter, LPHPFilter2, Envelope, LFO,
              Arpeggiator, Sequencer, Sample, Effects, Equalizer, Delay, Reverb,
-             Chorus, Distortion, Compressor, ModMatrix, Tempo, Mixer);
+             Chorus, Distortion, Compressor, ModMatrix, Tempo, Mixer};
 
 struct Component
 {
@@ -131,13 +134,14 @@ template <typename T> struct ValueRange
 using ValueRangeFloat = ValueRange<float>;
 using ValueRangeInt   = ValueRange<int>;
 
-DECLARE_ENUM(ParameterSourceRangeBaseRoles, uint, Unknown, Off, On,
+enum class ParameterSourceRangeBaseRoles: uint
+{ Unknown, Off, On,
              FilterLowpass2db, FilterLowpass4db, FilterHighpass2db,
              FilterHighpass4db, FilterBandpass2db, FilterBandpass4db,
              FilterPeak, FilterBandReject, FilterTwoPole, FilterFourPole,
              WaveFormSine, WaveFormAsymSine, WaveFormSawtooth,
              WaveFormSinetooth, WaveFormTriangle, WaveFormSquare,
-             WaveFormPulsewidth, WaveFormRandom, WaveFormSequence, WaveTable);
+             WaveFormPulsewidth, WaveFormRandom, WaveFormSequence, WaveTable};
 struct ParameterSourceRangeBase
 {
    using Role = ParameterSourceRangeBaseRoles;
@@ -165,8 +169,8 @@ struct ParameterSource
    std::optional<ParameterSourceMidi> midi;
 };
 
-DECLARE_ENUM(
-    ParameterRole, uint, Unknown, TrackVolume, TrigChance, Swing, Mute, Solo,
+enum class ParameterRole: uint
+{ Unknown, TrackVolume, TrigChance, Swing, Mute, Solo,
     KeyPrioMode, Pitch, PitchFinetune, Detune, OSCWaveform, OSCShape, OSCGlide,
     OSCGlideOnOff, OSCGlideType, OSCKeyboardTracking, OSCSync, OSCSlop, OSCMix,
     OSCNoise, OSCNoteSyncOnOff, OSC1Volume, OSC2Volume, RingModVolume,
@@ -190,7 +194,7 @@ DECLARE_ENUM(
     LowShelfFrequency, HighShelfFrequency, LowBandAmp, MidBandAmp, HighBandAmp,
     RetrigNum, RetrigTime, StereoWidth, DryWetMix, DelayAmnt, MakeupGain,
     Threshold, Distortion, DelayTime, DampingFactor, GateTime, ShelvingGain,
-    ShelvingFrequency, PreFxLevel, PostFxLevel);
+    ShelvingFrequency, PreFxLevel, PostFxLevel};
 
 struct Parameter
 {
@@ -218,7 +222,6 @@ struct Parameter
    [[nodiscard]] std::optional<float> getListIndexByListRole(
        ParameterSourceRangeBase::Role role) const noexcept;
    [[nodiscard]] int getSourceResolution() const noexcept;
-   [[nodiscard]] std::optional<ValueRangeEnd> getValueRange() const noexcept;
 };
 
 struct Presets

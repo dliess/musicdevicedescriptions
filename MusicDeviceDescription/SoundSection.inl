@@ -4,9 +4,10 @@
 #include <spdlog/spdlog.h>
 
 #include "JsonCast.h"
-#include "Overload.h"
+#include "UtilOverload.h"
 #include "SoundSection.h"
-#include "VectorIndexInRange.h"
+#include "UtilVectorIndexInRange.h"
+#include <magic_enum.hpp>
 
 // --------------------------------------------------------
 // base::musicDevice::description::sound::Section::DefaultInstrumentType
@@ -65,14 +66,19 @@ inline void from_json(const nlohmann::json& j,
 inline std::string
 base::musicDevice::description::sound::Component::role2String(Role role)
 {
-   return ~role;
+   return std::string(magic_enum::enum_name(role));
 }
 
 inline base::musicDevice::description::sound::Component::Role
 base::musicDevice::description::sound::Component::roleFromString(
     const std::string& roleStr)
 {
-   return create_ComponentRole(roleStr);
+   const auto val = magic_enum::enum_cast<Role>(roleStr);
+   if(!val)
+   {
+      throw std::runtime_error("Could not parse Enum");
+   }
+   return *val;
 }
 
 namespace base::musicDevice::description::sound
@@ -154,14 +160,19 @@ inline std::string
 base::musicDevice::description::sound::ParameterSourceRangeBase::role2String(
     Role role)
 {
-   return ~role;
+   return std::string(magic_enum::enum_name(role));
 }
 
 inline base::musicDevice::description::sound::ParameterSourceRangeBase::Role
 base::musicDevice::description::sound::ParameterSourceRangeBase::roleFromString(
     const std::string& roleStr)
 {
-   return create_ParameterSourceRangeBaseRoles(roleStr);
+   const auto val = magic_enum::enum_cast<Role>(roleStr);
+   if(!val)
+   {
+      throw std::runtime_error("Could not parse Enum");
+   }
+   return *val;
 }
 
 // --------------------------------------------------------
@@ -179,11 +190,16 @@ inline void from_json(const nlohmann::json& j, Parameter::Role& obj)
    obj = Parameter::roleFromString(j.get<std::string>());
 }
 
-inline std::string Parameter::role2String(Role role) { return ~role; }
+inline std::string Parameter::role2String(Role role) { return std::string(magic_enum::enum_name(role)); }
 
 inline Parameter::Role Parameter::roleFromString(const std::string& roleStr)
 {
-   return create_ParameterRole(roleStr);
+   const auto val =  magic_enum::enum_cast<Role>(roleStr);
+   if(!val.has_value()) 
+   {
+      throw std::runtime_error("Enum could not be parsed");
+   }
+   return val.value();
 }
 
 // --------------------------------------------------------
@@ -191,13 +207,18 @@ inline Parameter::Role Parameter::roleFromString(const std::string& roleStr)
 // --------------------------------------------------------
 inline void to_json(nlohmann::json& j, const ParameterDumpRequest::Effect& obj)
 {
-   j = ~obj;
+   j = magic_enum::enum_name(obj);
 }
 
 inline void from_json(const nlohmann::json& j,
                       ParameterDumpRequest::Effect& obj)
 {
-   obj = create_ParameterDumpRequestEffect(j.get<std::string>());
+   const auto val = magic_enum::enum_cast<ParameterDumpRequest::Effect>(j.get<std::string>());
+   if(!val.has_value()) 
+   {
+      throw std::runtime_error("Enum could not be parsed");
+   }
+   obj = val.value();
 }
 }   // namespace base::musicDevice::description::sound
 
@@ -574,7 +595,7 @@ inline int base::musicDevice::description::sound::Section::voice2EngineIdx(
    }
    else
    {
-      assert(util::vector_index_in_range(voiceIdx, voices));
+      assert(mddescrutil::vector_index_in_range(voiceIdx, voices));
       return voices[voiceIdx].engineId;
    }
 }
@@ -596,7 +617,7 @@ inline float base::musicDevice::description::sound::Section::getInitialValueFor(
 {
    const auto& paramDescr = parameterDescription(voiceId, parameterId);
    return mpark::visit(
-       util::overload{
+       mddescrutil::overload{
            [this, paramDescr](const int& val) -> float { return val; },
            [this, paramDescr](const double& val) -> float { return val; },
            [this,
@@ -822,29 +843,6 @@ base::musicDevice::description::sound::Parameter::getSourceResolution()
    return 0;
 }
 
-inline 
-std::optional<ValueRangeEnd> base::musicDevice::description::sound::Parameter::getValueRange() const noexcept
-{
-   switch (type)
-   {
-      case base::musicDevice::description::sound::Parameter::Type::List:
-      {
-         if (source.midi->sourceRanges)
-         {
-            return ListRangeEnd(source.midi->sourceRanges->size());
-         }
-         break;
-      }
-      case base::musicDevice::description::sound::Parameter::Type::Continous:
-      case base::musicDevice::description::sound::Parameter::Type::
-          ContinousBipolar:
-      {
-         return FloatingPointRangeEnd(1.0f);
-      }
-   }
-   return std::nullopt;
-}
-
 inline void base::musicDevice::description::sound::Section::
     autoFillSourceRangesForLists() noexcept
 {
@@ -884,7 +882,7 @@ inline void base::musicDevice::description::sound::Section::
             for (auto& fieldDescr : pMsg->sysexDescriptors)
             {
                accumSize +=
-                   mpark::visit(util::overload{[accumSize](auto&& val) -> int {
+                   mpark::visit(mddescrutil::overload{[accumSize](auto&& val) -> int {
                                    val.offset = accumSize;
                                    return val.sizeInSysex();
                                 }},
@@ -899,7 +897,7 @@ inline void base::musicDevice::description::sound::Section::
               rEngineBase.parameterDumpAnswer->sysexDescriptors)
          {
             accumSize +=
-                mpark::visit(util::overload{[accumSize](auto&& val) -> int {
+                mpark::visit(mddescrutil::overload{[accumSize](auto&& val) -> int {
                                 val.offset = accumSize;
                                 return val.sizeInSysex();
                              }},
@@ -913,7 +911,7 @@ inline bool base::musicDevice::description::sound::Section::isValidVoiceIdx(
     int voiceIdx) const noexcept
 {
    return (GlobalSectionId == voiceIdx ||
-           util::vector_index_in_range(voiceIdx, voices));
+           mddescrutil::vector_index_in_range(voiceIdx, voices));
 }
 
 inline base::musicDevice::description::sound::Engine*
@@ -1030,10 +1028,10 @@ base::musicDevice::description::sound::compInherit(
     const ComponentVar& parent, const ComponentVar& child) noexcept
 {
    ComponentVar ret = child;
-   mpark::visit(util::overload{
+   mpark::visit(mddescrutil::overload{
                     [](const Component&) {},
                     [&parent](OneOfComponents& ret) {
-                       mpark::visit(util::overload{
+                       mpark::visit(mddescrutil::overload{
                                         [](const Component&) {},
                                         [&ret](const OneOfComponents& parent) {
                                            if (parent.role && !ret.role)
