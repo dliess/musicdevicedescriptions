@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y \
         g++ \
         gdb \
         git \
+        libasound2-dev \
         libgtest-dev \
         libgmock-dev \
         libspdlog-dev \

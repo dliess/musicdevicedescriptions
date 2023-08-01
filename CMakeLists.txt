@@ -33,6 +33,13 @@ CPMFindPackage(
 
 find_package(spdlog 1.8.1 CONFIG REQUIRED)
 
+if(${BUILD_TESTS})
+  find_package(GTest REQUIRED)
+  list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+  find_package(GMock REQUIRED)
+  include_directories(${GMOCK_INCLUDE_DIRS}) 
+endif()
+
 CPMFindPackage(
   NAME nlohmann_json
   GITHUB_REPOSITORY nlohmann/json
@@ -54,6 +61,12 @@ CPMFindPackage(
 if(MetaStuff_ADDED)
   add_library(MetaStuff::MetaStuff ALIAS MetaStuff)
 endif()
+
+CPMFindPackage(
+  NAME magic_enum
+  GITHUB_REPOSITORY Neargye/magic_enum
+  VERSION 0.9.0
+)
 
 add_subdirectory(Util)
 add_subdirectory(MusicDeviceDescription)
