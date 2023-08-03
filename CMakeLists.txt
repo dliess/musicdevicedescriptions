@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 set (CMAKE_CXX_STANDARD 20)
 set(CMAKE_DEBUG_POSTFIX _g)
 
-project(MusicDeviceDescriptions LANGUAGES CXX)
+project(MusicDeviceDescriptions LANGUAGES CXX
+        VERSION 0.0.1)
 include(GNUInstallDirs)
 
 include(CTest)
@@ -70,3 +71,30 @@ CPMFindPackage(
 
 add_subdirectory(Util)
 add_subdirectory(MusicDeviceDescription)
+
+
+set_target_properties(${TARGET_NAME} PROPERTIES
+    PUBLIC_HEADER "${PUBLIC_HEADERS}"
+)
+
+install(TARGETS ${TARGET_NAME}  
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+install(TARGETS ${TARGET_NAME} EXPORT ${TARGET_NAME}-targets
+  INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}"
+)
+
+install(EXPORT ${TARGET_NAME}-targets
+    NAMESPACE
+        MDDESCR::
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+)
+
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file("${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config-version.cmake" COMPATIBILITY SameMajorVersion)
+install(FILES 
+           "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake"
+           "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config-version.cmake" 
+        DESTINATION 
+           "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
