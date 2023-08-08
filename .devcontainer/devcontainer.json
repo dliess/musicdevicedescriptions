@@ -1,5 +1,5 @@
 {
-    "name": "MidiEmBuildEnv",
+    "name": "MusicDeviceDescriptionsBuildEnv",
     "build": {
          "dockerfile": "Dockerfile"
     },

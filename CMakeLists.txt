@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 set (CMAKE_CXX_STANDARD 20)
 set(CMAKE_DEBUG_POSTFIX _g)
 
-project(MusicDeviceDescriptions LANGUAGES CXX
+project(MusicDeviceDescriptions 
+        LANGUAGES CXX
         VERSION 0.0.1)
 include(GNUInstallDirs)
 
@@ -19,7 +20,7 @@ CPMFindPackage(
   NAME midi
   GITHUB_REPOSITORY dliess/Midi
   #GIT_REPOSITORY git@danita-hp:app/Midi.git
-  GIT_TAG d64ac0fb3e79227ef2d26b3b7e0d24a4be48d8a7
+  GIT_TAG master
 )
 if(midi_ADDED)
   add_library(MIDI::midi ALIAS midi)
@@ -27,9 +28,9 @@ if(midi_ADDED)
 endif()
 
 CPMFindPackage(
-  NAME mpark_variant
-  GITHUB_REPOSITORY mpark/variant
-  VERSION 1.4.0
+  NAME variant
+  GITHUB_REPOSITORY dliess/variant
+  GIT_TAG master
 )
 
 find_package(spdlog 1.8.1 CONFIG REQUIRED)
@@ -41,16 +42,16 @@ if(${BUILD_TESTS})
   include_directories(${GMOCK_INCLUDE_DIRS}) 
 endif()
 
-CPMFindPackage(
-  NAME nlohmann_json
-  GITHUB_REPOSITORY nlohmann/json
-  VERSION 3.9.1
-  OPTIONS
-    "JSON_BuildTests OFF"
-)
-if(nlohmann_json_ADDED)
-  add_library(nlohmann_json::nlohmann_json ALIAS nlohmann_json)
-endif()
+#CPMFindPackage(
+#  NAME nlohmann_json
+#  GITHUB_REPOSITORY nlohmann/json
+#  VERSION 3.9.1
+#  OPTIONS
+#    "JSON_BuildTests OFF"
+#)
+#if(nlohmann_json_ADDED)
+#  add_library(nlohmann_json::nlohmann_json ALIAS nlohmann_json)
+#endif()
 
 CPMFindPackage(
   NAME MetaStuff
@@ -59,35 +60,39 @@ CPMFindPackage(
   OPTIONS
     "WITH_EXAMPLES OFF"
 )
-if(MetaStuff_ADDED)
-  add_library(MetaStuff::MetaStuff ALIAS MetaStuff)
-endif()
 
 CPMFindPackage(
   NAME magic_enum
   GITHUB_REPOSITORY Neargye/magic_enum
   VERSION 0.9.0
 )
+if(magic_enum_ADDED)
+install(
+  TARGETS magic_enum
+  EXPORT ${PROJECT_NAME}-targets
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
+)
+endif()
 
 add_subdirectory(Util)
 add_subdirectory(MusicDeviceDescription)
 
 
-set_target_properties(${TARGET_NAME} PROPERTIES
-    PUBLIC_HEADER "${PUBLIC_HEADERS}"
+#install(TARGETS ${TARGET_NAME}  
+#  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+#)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in 
+               ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake @ONLY)
+
+install(
+  TARGETS Util MusicDeviceDescription
+  EXPORT ${PROJECT_NAME}-targets
+  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
 )
 
-install(TARGETS ${TARGET_NAME}  
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-
-install(TARGETS ${TARGET_NAME} EXPORT ${TARGET_NAME}-targets
-  INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}"
-)
-
-install(EXPORT ${TARGET_NAME}-targets
+install(EXPORT ${PROJECT_NAME}-targets
     NAMESPACE
-        MDDESCR::
+        ${PROJECT_NAME}::
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
 )
 

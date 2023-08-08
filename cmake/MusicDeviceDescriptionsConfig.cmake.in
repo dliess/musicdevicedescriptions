@@ -1,0 +1,10 @@
+get_filename_component(ThisProjects_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(CMakeFindDependencyMacro)
+
+find_dependency(midi REQUIRED)
+find_dependency(Variant REQUIRED)
+find_dependency(MetaStuff REQUIRED)
+
+if(NOT TARGET @PROJECT_NAME@::MusicDeviceDescription)
+    include("${ThisProjects_CMAKE_DIR}/@PROJECT_NAME@-targets.cmake")
+endif()
