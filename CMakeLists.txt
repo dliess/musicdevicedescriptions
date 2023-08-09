@@ -14,6 +14,8 @@ if (${BUILD_TESTS})
    enable_testing()
 endif()
 
+option (USE_MPARK_VARIANT "use mpark variant" ON)
+
 include(cmake/CPM.cmake)
 
 CPMFindPackage(
@@ -21,6 +23,8 @@ CPMFindPackage(
   GITHUB_REPOSITORY dliess/Midi
   #GIT_REPOSITORY git@danita-hp:app/Midi.git
   GIT_TAG master
+  OPTIONS
+    "USE_MPARK_VARIANT ${USE_MPARK_VARIANT}"
 )
 if(midi_ADDED)
   add_library(MIDI::midi ALIAS midi)
@@ -31,6 +35,8 @@ CPMFindPackage(
   NAME variant
   GITHUB_REPOSITORY dliess/variant
   GIT_TAG master
+  OPTIONS
+    "USE_MPARK_VARIANT ${USE_MPARK_VARIANT}"
 )
 
 find_package(spdlog 1.8.1 CONFIG REQUIRED)
@@ -59,6 +65,7 @@ CPMFindPackage(
   GIT_TAG develop
   OPTIONS
     "WITH_EXAMPLES OFF"
+    "USE_MPARK_VARIANT ${USE_MPARK_VARIANT}"
 )
 
 CPMFindPackage(
@@ -77,10 +84,6 @@ endif()
 add_subdirectory(Util)
 add_subdirectory(MusicDeviceDescription)
 
-
-#install(TARGETS ${TARGET_NAME}  
-#  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-#)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in 
                ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake @ONLY)
 
