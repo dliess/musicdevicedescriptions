@@ -41,9 +41,9 @@ target_include_directories(${TARGET_NAME}
 target_link_libraries(${TARGET_NAME}
    PUBLIC MetaStuff::SerializeJson
    PUBLIC Variant::Variant
-   PUBLIC Util
    PUBLIC MIDI::midi
    PUBLIC magic_enum::magic_enum
+   PUBLIC MusicDeviceDescriptionUtil
 )
 
 set_target_properties(${TARGET_NAME} PROPERTIES

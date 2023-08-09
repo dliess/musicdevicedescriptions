@@ -1,4 +1,4 @@
-set(TARGET_NAME Util)
+set(TARGET_NAME MusicDeviceDescriptionUtil)
 
 set(HEADERS 
     "${CMAKE_CURRENT_SOURCE_DIR}/2DMatrixCheck.h"

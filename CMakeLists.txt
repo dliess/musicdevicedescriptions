@@ -88,7 +88,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in
                ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake @ONLY)
 
 install(
-  TARGETS Util MusicDeviceDescription
+  TARGETS MusicDeviceDescriptionUtil MusicDeviceDescription
   EXPORT ${PROJECT_NAME}-targets
   PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
 )
