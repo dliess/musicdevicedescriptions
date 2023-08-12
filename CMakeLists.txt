@@ -106,3 +106,8 @@ install(FILES
            "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config-version.cmake" 
         DESTINATION 
            "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+
+install(
+  DIRECTORY "MidiConfigs"
+  DESTINATION "/etc/nomidi-backend/"
+)
