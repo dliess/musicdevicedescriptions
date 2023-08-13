@@ -88,15 +88,13 @@
           {
             ".type": "OneOfComponents",
             "name": "Effect 1",
-            "role": "Effect",
             "selectorParam": {
               "component": "Effect-Select",
               "name": "Effect1 Type"
             },
             "oneOfComponents": [
               {
-                "name": "None",
-                "role": "None"
+                "name": "None"
               },
               {
                 "name": "Filter1",
@@ -144,15 +142,13 @@
           {
             ".type": "OneOfComponents",
             "name": "Effect 2",
-            "role": "Effect",
             "selectorParam": {
               "component": "Effect-Select",
               "name": "Effect2 Type"
             },
             "oneOfComponents": [
               {
-                "name": "None",
-                "role": "None"
+                "name": "None"
               },
               {
                 "name": "Filter2",

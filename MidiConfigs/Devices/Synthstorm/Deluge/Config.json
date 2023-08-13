@@ -60,12 +60,10 @@
             "role": "Delay"
           },
           {
-            "name": "FM Mod1",
-            "role": "FM"
+            "name": "FM Mod1"
           },
           {
-            "name": "FM Mod2",
-            "role": "FM"
+            "name": "FM Mod2"
           }
         ],
         "parameters": [

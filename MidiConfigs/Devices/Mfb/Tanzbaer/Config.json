@@ -241,7 +241,6 @@
           {
             "name": "Tone",
             "type": "continous",
-            "role": "Tone",
             "source": {
               "midi": {
                 "id": {

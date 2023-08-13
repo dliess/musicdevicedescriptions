@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <nlohmann/json.hpp>
 #include <fstream>
+#include <spdlog/spdlog.h>
 
 
 #include "MusicDeviceDescription.h"
@@ -59,6 +60,7 @@ TEST(MusicDeviceDescriptionTest, verifyJsons)
       for (const auto& devicePath : fs::directory_iterator(manufacturerPath))
       {
          const std::string jsonFileName = fmt::format("{}/Config.json", std::string(devicePath.path()));
+         spdlog::info("CHECKING {}", jsonFileName);
          std::ifstream jsonFile(jsonFileName);
          ASSERT_FALSE(jsonFile.fail()) << jsonFileName;
          nlohmann::json jsonParsed;

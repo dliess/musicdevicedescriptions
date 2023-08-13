@@ -7,6 +7,7 @@
 #include "Variant.h"
 #include "SoundSection.h"
 #include "UtilVectorIndexInRange.h"
+#define MAGIC_ENUM_RANGE_MAX 256
 #include <magic_enum.hpp>
 
 // --------------------------------------------------------
@@ -76,6 +77,7 @@ base::musicDevice::description::sound::Component::roleFromString(
    const auto val = magic_enum::enum_cast<Role>(roleStr);
    if(!val)
    {
+      spdlog::error("Enum {} could not be parsed", roleStr);
       throw std::runtime_error("Could not parse Enum");
    }
    return *val;
@@ -170,6 +172,7 @@ base::musicDevice::description::sound::ParameterSourceRangeBase::roleFromString(
    const auto val = magic_enum::enum_cast<Role>(roleStr);
    if(!val)
    {
+      spdlog::error("Enum {} could not be parsed", roleStr);
       throw std::runtime_error("Could not parse Enum");
    }
    return *val;
@@ -197,6 +200,7 @@ inline Parameter::Role Parameter::roleFromString(const std::string& roleStr)
    const auto val =  magic_enum::enum_cast<Role>(roleStr);
    if(!val.has_value()) 
    {
+      spdlog::error("Enum {} could not be parsed", roleStr);
       throw std::runtime_error("Enum could not be parsed");
    }
    return val.value();

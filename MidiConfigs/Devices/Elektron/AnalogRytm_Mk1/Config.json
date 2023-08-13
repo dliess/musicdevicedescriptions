@@ -26,23 +26,22 @@
           {
             ".type": "OneOfComponents",
             "name": "Synth",
-            "role": "Oscilllator",
+            "role": "Oscillator",
             "selectorParam": {
               "component": "Common",
               "name": "Machine Type"
             },
             "oneOfComponents": [
               {
-                "name": "None",
-                "role": "None"
+                "name": "None"
               },
               {
                 "name": "Noise",
-                "role": "NoiseSynth"
+                "role": "Noise"
               },
               {
                 "name": "Impulse",
-                "role": "ImpulseSynth"
+                "role": "Impulse"
               }
             ]
           },
@@ -672,7 +671,6 @@
             "name": "Polarity",
             "type": "list",
             "component": "Impulse",
-            "role": "Polarity",
             "source": {
               "midi": {
                 "id": {
@@ -683,7 +681,6 @@
                 "sourceRanges": [
                   {
                     "name": "Positive",
-                    "role": "Positive",
                     "range": {
                       "from": 0,
                       "to": 0
@@ -691,7 +688,6 @@
                   },
                   {
                     "name": "Negative",
-                    "role": "Negative",
                     "range": {
                       "from": 128,
                       "to": 128
@@ -2655,7 +2651,7 @@
           {
             ".type": "OneOfComponents",
             "name": "Synth",
-            "role": "Oscilllator",
+            "role": "Oscillator",
             "selectorParam": {
               "component": "Common",
               "name": "Machine Type"
@@ -4075,7 +4071,7 @@
             "name": "Noise LPF Res",
             "type": "continous",
             "component": "SnareDrum-Natural",
-            "role": "Resonance",
+            "role": "LPFilterResonance",
             "source": {
               "midi": {
                 "id": {
@@ -4101,9 +4097,6 @@
               }
             }
           },
-
-
-
           {
             "name": "Level",
             "type": "continous",
@@ -4225,7 +4218,7 @@
           {
             ".type": "OneOfComponents",
             "name": "Synth",
-            "role": "Oscilllator",
+            "role": "Oscillator",
             "selectorParam": {
               "component": "Common",
               "name": "Machine Type"
@@ -4647,7 +4640,7 @@
           {
             ".type": "OneOfComponents",
             "name": "Synth",
-            "role": "Oscilllator",
+            "role": "Oscillator",
             "selectorParam": {
               "component": "Common",
               "name": "Machine Type"
@@ -4772,7 +4765,7 @@
           {
             ".type": "OneOfComponents",
             "name": "Synth",
-            "role": "Oscilllator",
+            "role": "Oscillator",
             "selectorParam": {
               "component": "Common",
               "name": "Machine Type"
@@ -4938,7 +4931,7 @@
           {
             ".type": "OneOfComponents",
             "name": "Synth",
-            "role": "Oscilllator",
+            "role": "Oscillator",
             "selectorParam": {
               "component": "Common",
               "name": "Machine Type"
@@ -5323,7 +5316,7 @@
           {
             ".type": "OneOfComponents",
             "name": "Synth",
-            "role": "Oscilllator",
+            "role": "Oscillator",
             "selectorParam": {
               "component": "Common",
               "name": "Machine Type"

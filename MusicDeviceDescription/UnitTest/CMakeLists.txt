@@ -11,6 +11,7 @@ target_link_libraries(${TARGET_NAME}
    GTest::Main 
    pthread
    fmt
+   spdlog::spdlog
 )
 
 add_test(NAME ${TARGET_NAME} COMMAND ${TARGET_NAME})

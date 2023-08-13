@@ -97,7 +97,8 @@ enum class ComponentRole: uint
 { Unknown, Track, NoteTrigger, Oscillator, Amp,
              Filter, LPFilter, HPFilter, LPHPFilter, LPHPFilter2, Envelope, LFO,
              Arpeggiator, Sequencer, Sample, Effects, Equalizer, Delay, Reverb,
-             Chorus, Distortion, Compressor, ModMatrix, Tempo, Mixer};
+             Chorus, Phaser, Flanger, Spatializer, Distortion, Compressor, ModMatrix, 
+             Tempo, Mixer, Noise, Impulse};
 
 struct Component
 {
@@ -194,7 +195,8 @@ enum class ParameterRole: uint
     LowShelfFrequency, HighShelfFrequency, LowBandAmp, MidBandAmp, HighBandAmp,
     RetrigNum, RetrigTime, StereoWidth, DryWetMix, DelayAmnt, MakeupGain,
     Threshold, Distortion, DelayTime, DampingFactor, GateTime, ShelvingGain,
-    ShelvingFrequency, PreFxLevel, PostFxLevel};
+    ShelvingFrequency, PreFxLevel, PostFxLevel 
+};
 
 struct Parameter
 {

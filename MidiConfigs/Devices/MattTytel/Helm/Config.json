@@ -45,8 +45,7 @@
             "role": "Envelope"
           },
           {
-            "name": "Stutter",
-            "role": "Effect"
+            "name": "Stutter"
           },
           {
             "name": "Distortion",
