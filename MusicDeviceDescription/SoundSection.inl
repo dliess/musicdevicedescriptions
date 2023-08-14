@@ -7,7 +7,9 @@
 #include "Variant.h"
 #include "SoundSection.h"
 #include "UtilVectorIndexInRange.h"
+#ifndef MAGIC_ENUM_RANGE_MAX
 #define MAGIC_ENUM_RANGE_MAX 256
+#endif
 #include <magic_enum.hpp>
 
 // --------------------------------------------------------
