@@ -32,7 +32,7 @@ if(midi_ADDED)
 endif()
 
 CPMFindPackage(
-  NAME variant
+  NAME Variant
   GITHUB_REPOSITORY dliess/variant
   GIT_TAG master
   OPTIONS
