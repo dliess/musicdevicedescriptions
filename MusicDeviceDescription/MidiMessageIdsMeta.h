@@ -55,6 +55,20 @@ inline auto registerMembers<midi::MidiMsgId<midi::ControlChangeHighRes>>()
 }
 
 template<>
+inline auto getClassNameOrIndex<midi::MidiMsgId<midi::ControlChangeDoubleRes>>(
+   int i) noexcept
+{
+   return "MidiControlChangeDoubleRes";
+}
+template<>
+inline auto registerMembers<midi::MidiMsgId<midi::ControlChangeDoubleRes>>()
+{
+   return members(
+      member("bottomHalfId", &midi::MidiMsgId<midi::ControlChangeDoubleRes>::bottomHalfId),
+      member("topHalfId", &midi::MidiMsgId<midi::ControlChangeDoubleRes>::topHalfId));
+}
+
+template<>
 inline auto getClassNameOrIndex<midi::MidiMsgId<midi::NRPN>>(int i) noexcept
 {
    return "MidiNRPN";
