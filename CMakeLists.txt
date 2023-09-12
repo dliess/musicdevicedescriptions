@@ -68,6 +68,9 @@ CPMFindPackage(
 add_subdirectory(Util)
 add_subdirectory(MusicDeviceDescription)
 
+set_target_properties(MusicDeviceDescription PROPERTIES CONFIG_FILES_BASEDIR ${CMAKE_CURRENT_LIST_DIR}/MidiConfigs) 
+
+set(CONFIG_FILES_BASEDIR "/etc/nomidi-backend/MidiConfigs")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in 
                ${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}Config.cmake @ONLY)
 
@@ -90,8 +93,13 @@ install(FILES
            "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config-version.cmake" 
         DESTINATION 
            "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
+         
+install(
+  FILES "MidiConfigs/usbMidiName2device.json"
+  DESTINATION ${CONFIG_FILES_BASEDIR}
+)
+install(
+  DIRECTORY "MidiConfigs/Devices"
+  DESTINATION ${CONFIG_FILES_BASEDIR}
+)
 
-#install(
-#  DIRECTORY "MidiConfigs"
-#  DESTINATION "/etc/nomidi-backend/"
-#)

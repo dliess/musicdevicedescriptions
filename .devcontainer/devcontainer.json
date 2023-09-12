@@ -37,6 +37,7 @@
        "hbenl.vscode-test-explorer",
        "redhat.vscode-xml",
        "shd101wyy.markdown-preview-enhanced",
-       "sonarsource.sonarlint-vscode"
+       "sonarsource.sonarlint-vscode",
+       "github.copilot"
     ]
  }

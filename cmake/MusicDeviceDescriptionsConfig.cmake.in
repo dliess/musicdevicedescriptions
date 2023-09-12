@@ -8,3 +8,7 @@ find_dependency(MetaStuff REQUIRED)
 if(NOT TARGET @PROJECT_NAME@::MusicDeviceDescription)
     include("${MusicDeviceDescriptions_CMAKE_DIR}/@PROJECT_NAME@-targets.cmake")
 endif()
+
+set_target_properties(@PROJECT_NAME@::MusicDeviceDescription PROPERTIES
+    CONFIG_FILES_BASEDIR @CONFIG_FILES_BASEDIR@
+)
