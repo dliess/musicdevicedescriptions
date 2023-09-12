@@ -48,17 +48,6 @@ if(${BUILD_TESTS})
   include_directories(${GMOCK_INCLUDE_DIRS}) 
 endif()
 
-#CPMFindPackage(
-#  NAME nlohmann_json
-#  GITHUB_REPOSITORY nlohmann/json
-#  VERSION 3.9.1
-#  OPTIONS
-#    "JSON_BuildTests OFF"
-#)
-#if(nlohmann_json_ADDED)
-#  add_library(nlohmann_json::nlohmann_json ALIAS nlohmann_json)
-#endif()
-
 CPMFindPackage(
   NAME MetaStuff
   GIT_REPOSITORY git@github.com:dliess/MetaStuff.git
@@ -72,14 +61,9 @@ CPMFindPackage(
   NAME magic_enum
   GITHUB_REPOSITORY Neargye/magic_enum
   VERSION 0.9.0
+  OPTIONS
+    "MAGIC_ENUM_OPT_INSTALL ON"
 )
-if(magic_enum_ADDED)
-install(
-  TARGETS magic_enum
-  EXPORT ${PROJECT_NAME}-targets
-  PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}
-)
-endif()
 
 add_subdirectory(Util)
 add_subdirectory(MusicDeviceDescription)
@@ -107,7 +91,7 @@ install(FILES
         DESTINATION 
            "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}")
 
-install(
-  DIRECTORY "MidiConfigs"
-  DESTINATION "/etc/nomidi-backend/"
-)
+#install(
+#  DIRECTORY "MidiConfigs"
+#  DESTINATION "/etc/nomidi-backend/"
+#)
