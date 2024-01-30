@@ -17,28 +17,36 @@
         "name": "MainEngine",
         "components": [
           {
-            "name": "General"
+            "name": "General",
+            "role": "Amp"
           },
           {
-            "name": "Oscillator"
+            "name": "Oscillator",
+            "role": "Oscillator"
           },
           {
-            "name": "Filter"
+            "name": "Filter",
+            "role": "Filter"
           },
           {
-            "name": "Cycling envelope"
+            "name": "Cycling envelope",
+            "role": "Envelope"
           },
           {
-            "name": "Arpeggiator/sequencer"
+            "name": "Arpeggiator/sequencer",
+            "role": "Arpeggiator"
           },
           {
-            "name": "LFO"
+            "name": "LFO",
+            "role": "LFO"
           },
           {
-            "name": "Envelope"
+            "name": "Envelope",
+            "role": "Envelope"
           },
           {
-            "name": "Keyboard"
+            "name": "Keyboard",
+            "role": "NoteTrigger"
           }
         ],
         "parameters": [
@@ -47,6 +55,7 @@
             "description": "",
             "type": "continous",
             "component": "General",
+            "role": "OSCGlide",
             "source": {
               "midi": {
                 "id": {
@@ -61,6 +70,7 @@
             "description": "",
             "type": "continous",
             "component": "Oscillator",
+            "role": "OSCWaveform",
             "source": {
               "midi": {
                 "id": {
@@ -75,6 +85,7 @@
             "description": "",
             "type": "continous",
             "component": "Oscillator",
+            "role": "OSCShape",
             "source": {
               "midi": {
                 "id": {
@@ -89,6 +100,7 @@
             "description": "",
             "type": "continous",
             "component": "Oscillator",
+            "role": "OSCShape",
             "source": {
               "midi": {
                 "id": {
@@ -103,6 +115,7 @@
             "description": "",
             "type": "continous",
             "component": "Oscillator",
+            "role": "OSCShape",
             "source": {
               "midi": {
                 "id": {
@@ -117,6 +130,7 @@
             "description": "",
             "type": "continous",
             "component": "Filter",
+            "role": "FilterCutoff",
             "source": {
               "midi": {
                 "id": {
@@ -131,6 +145,7 @@
             "description": "",
             "type": "continous",
             "component": "Filter",
+            "role": "FilterResonance",
             "source": {
               "midi": {
                 "id": {
@@ -145,6 +160,7 @@
             "description": "",
             "type": "continous",
             "component": "Cycling envelope",
+            "role": "Attack",
             "source": {
               "midi": {
                 "id": {
@@ -159,6 +175,7 @@
             "description": "",
             "type": "continous",
             "component": "Cycling envelope",
+            "role": "Decay",
             "source": {
               "midi": {
                 "id": {
@@ -173,6 +190,7 @@
             "description": "",
             "type": "continous",
             "component": "Cycling envelope",
+            "role": "Hold",
             "source": {
               "midi": {
                 "id": {
@@ -187,6 +205,7 @@
             "description": "",
             "type": "continous",
             "component": "Cycling envelope",
+            "role": "EnvAmount",
             "source": {
               "midi": {
                 "id": {
@@ -201,6 +220,7 @@
             "description": "",
             "type": "continous",
             "component": "Arpeggiator/sequencer",
+            "role": "ArpOnOff",
             "source": {
               "midi": {
                 "id": {
@@ -215,6 +235,7 @@
             "description": "",
             "type": "continous",
             "component": "Arpeggiator/sequencer",
+            "role": "ArpMode",
             "source": {
               "midi": {
                 "id": {
@@ -229,6 +250,7 @@
             "description": "",
             "type": "continous",
             "component": "LFO",
+            "role": "LFOFrequency",
             "source": {
               "midi": {
                 "id": {
@@ -243,6 +265,7 @@
             "description": "",
             "type": "continous",
             "component": "LFO",
+            "role": "LFOMultiplier",
             "source": {
               "midi": {
                 "id": {
@@ -257,6 +280,7 @@
             "description": "",
             "type": "continous",
             "component": "Envelope",
+            "role": "Attack",
             "source": {
               "midi": {
                 "id": {
@@ -271,6 +295,7 @@
             "description": "",
             "type": "continous",
             "component": "Envelope",
+            "role": "Decay",
             "source": {
               "midi": {
                 "id": {
@@ -285,6 +310,7 @@
             "description": "",
             "type": "continous",
             "component": "Envelope",
+            "role": "Sustain",
             "source": {
               "midi": {
                 "id": {
@@ -299,6 +325,7 @@
             "description": "",
             "type": "continous",
             "component": "Keyboard",
+            "role": "KeyPrioMode",
             "source": {
               "midi": {
                 "id": {
@@ -313,6 +340,7 @@
             "description": "",
             "type": "continous",
             "component": "Keyboard",
+            "role": "Detune",
             "source": {
               "midi": {
                 "id": {
@@ -327,3 +355,4 @@
     ]
   }
 }
+

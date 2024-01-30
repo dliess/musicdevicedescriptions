@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 # Users and passwords
 ARG BUILD_USER=build-user
@@ -60,6 +60,5 @@ WORKDIR /home/build-user
 
 RUN wget -qO- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | zsh || true
 RUN sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="gentoo"/g' ~/.zshrc
-
-
-
+RUN echo "alias nvim=~/nvim-linux64/bin/nvim" >> ~/.zshrc
+RUN echo "alias vim=~/nvim-linux64/bin/nvim" >> ~/.zshrc
