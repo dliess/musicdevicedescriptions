@@ -29,11 +29,11 @@
             "role": "Filter"
           },
           {
-            "name": "Cycling envelope",
+            "name": "CycEnvelope",
             "role": "Envelope"
           },
           {
-            "name": "Arpeggiator/sequencer",
+            "name": "Arp/Seq",
             "role": "Arpeggiator"
           },
           {
@@ -156,10 +156,10 @@
             }
           },
           {
-            "name": "Cycling env rise",
+            "name": "CycEnv Attack",
             "description": "",
             "type": "continous",
-            "component": "Cycling envelope",
+            "component": "CycEnvelope",
             "role": "Attack",
             "source": {
               "midi": {
@@ -171,10 +171,10 @@
             }
           },
           {
-            "name": "Cycling env fall",
+            "name": "CycEnv Decay",
             "description": "",
             "type": "continous",
-            "component": "Cycling envelope",
+            "component": "CycEnvelope",
             "role": "Decay",
             "source": {
               "midi": {
@@ -186,11 +186,11 @@
             }
           },
           {
-            "name": "Cycling env hold",
+            "name": "CycEnv Sustain",
             "description": "",
             "type": "continous",
-            "component": "Cycling envelope",
-            "role": "Hold",
+            "component": "CycEnvelope",
+            "role": "Sustain",
             "source": {
               "midi": {
                 "id": {
@@ -201,10 +201,10 @@
             }
           },
           {
-            "name": "Cycling env amount",
+            "name": "CycEnv amount",
             "description": "",
             "type": "continous",
-            "component": "Cycling envelope",
+            "component": "CycEnvelope",
             "role": "EnvAmount",
             "source": {
               "midi": {
@@ -219,7 +219,7 @@
             "name": "ARP/SEQ rate (free)",
             "description": "",
             "type": "continous",
-            "component": "Arpeggiator/sequencer",
+            "component": "Arp/Seq",
             "role": "ArpOnOff",
             "source": {
               "midi": {
@@ -234,7 +234,7 @@
             "name": "ARP/SEQ rate (sync)",
             "description": "",
             "type": "continous",
-            "component": "Arpeggiator/sequencer",
+            "component": "Arp/Seq",
             "role": "ArpMode",
             "source": {
               "midi": {
